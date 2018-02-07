@@ -5,6 +5,7 @@ from gi.repository import Gtk
 
 import random
 import math
+import figurasgeo
 
 #fitxer_glade = "TutPythonGTK_2.glade"
 #cairo_window_name = "dlg_ex_cairo"
@@ -120,20 +121,21 @@ class MainHandler():
 #        Gtk.main_quit(*args)
         
         dialog = Gtk.MessageDialog(self.gtk_main_win, 0, Gtk.MessageType.QUESTION,
-                                   Gtk.ButtonsType.YES_NO, "Realment vols tancar l'aplicació?")
+                                   Gtk.ButtonsType.OK_CANCEL, "Realment vols tancar l'aplicació?")
         dialog.format_secondary_text(
-            "Clica 'SI' per tancar l'aplicació, o, 'NO' per continuar treballant-hi.")
+            "Clica 'SI' per tancar l'aplicació, o, 'Cancelar' per continuar treballant-hi.")
+        dialog.set_default_response(Gtk.ResponseType.OK) 
         response = dialog.run()
         dialog.destroy()
         
-        if response == Gtk.ResponseType.YES:
-            print("QUESTION dialog closed by clicking YES button")
+        if response == Gtk.ResponseType.OK:
+            print("QUESTION dialog closed by clicking OK button")
             Gtk.main_quit(*args)
-            return True
-        elif response == Gtk.ResponseType.NO:
-            print("QUESTION dialog closed by clicking NO button")
+        else:
+            print("QUESTION dialog closed by clicking CANCEL button")
             self.gtk_main_win.show()
-            return True
+        
+        return True
 
 
 #class CairoHandler():            
@@ -143,30 +145,9 @@ class MainHandler():
         return True
 
     def on_btn_bezier(self, param):
-        import tutorialcairo
-        tutorialcairo.Bezier(self.LstStorePunts)
+        figurasgeo.Bezier(self.LstStorePunts)
         self.LstSelection.select_iter(self.LstStorePunts.get_iter_first())
-        
-#        self.LstStorePunts.clear()
-#        print("on_btn_bezier", param)
-#        pc = [(-2, 3), (-2, 5), (2, 5), (2, 3)]
-#        indent = "    "
-#        print(indent, "i".rjust(6), "X".rjust(6), "Y".rjust(6))
-#        print(indent, "=====".rjust(6), "=====".rjust(6), "=====".rjust(6))
-#        for i in range(len(pc)):
-#            print(indent, str(i).rjust(6), str(pc[i][0]).rjust(6), str(pc[i][1]).rjust(6))
-#            
-#        paso = 10
-#        for tt in range (-100, 200 + paso, paso):
-#            t = tt / 100.0
-##            x = pc[0][0] * (t ** 3) + pc[1][0] * (t ** 2) + pc[2][0] * t + pc[3][0]
-##            y = pc[0][1] * (t ** 3) + pc[1][1] * (t ** 2) + pc[2][1] * t + pc[3][1]
-#            x = pc[0][0] * ((1 - t) ** 3) + 3 * pc[1][0] * t * ((1 - t) ** 2) + 3 * pc[2][0] * (t ** 2) * (1 - t) + pc[3][0] * (t ** 3)
-#            y = pc[0][1] * ((1 - t) ** 3) + 3 * pc[1][1] * t * ((1 - t) ** 2) + 3 * pc[2][1] * (t ** 2) * (1 - t) + pc[3][1] * (t ** 3)
-#            listiter = self.LstStorePunts.append([round(x, 3), round(y, 3), str(t)])  
-#        
-#        self.LstSelection.select_iter(listiter)
-    
+            
     def on_btn_logaritm(self, param):
         print("on_btn_logaritm", param)
         self.LstStorePunts.clear()
@@ -234,41 +215,9 @@ class MainHandler():
     
     def on_btn_elipse(self, param):
         print("on_btn_elipse", param)
-        self.LstStorePunts.clear()
-        i = 1
-        ancho = 6
-        alto = 4
-        
-        x = -ancho
-        xFin = x + 0.5
-        paso = 0.05
-        while x <= xFin:
-            y = round(math.sqrt((1 - (x ** 2) / (ancho ** 2)) * (alto ** 2)), 3)
-            listiter = self.LstStorePunts.append([x, y, "{0}->  Paso: {1} Final: {2} ".format(i, paso, xFin)]) 
-            x += paso
-            i += 1
-                
-        x = xFin
-        xFin = ancho - 0.5
-        paso = 0.5        
-        while x <= xFin:
-            y = round(math.sqrt((1 - (x ** 2) / (ancho ** 2)) * (alto ** 2)), 3)
-            listiter = self.LstStorePunts.append([x, y, "{0}->  Paso: {1} Final: {2} ".format(i, paso, xFin)]) 
-            x += paso
-            i += 1
-                
-        x = xFin
-        xFin = ancho
-        paso = 0.05        
-        while x <= xFin:
-            y = round(math.sqrt((1 - (x ** 2) / (ancho ** 2)) * (alto ** 2)), 3)
-            listiter = self.LstStorePunts.append([x, y, "{0}->  Paso: {1} Final: {2} ".format(i, paso, xFin)]) 
-            x += paso
-            i += 1
-                
-        
-        self.LstSelection.select_iter(listiter)
-    
+        figurasgeo.Elipse(self.LstStorePunts, 5, 4)
+        self.LstSelection.select_iter(self.LstStorePunts.get_iter_first())
+            
     def on_btn_sinus(self, param):
         print("on_btn_sinus", param)
         self.LstStorePunts.clear()
@@ -363,15 +312,15 @@ class MainHandler():
         self.DrawArea.queue_draw()
         
     def print_punts(self, indent):
-        print(indent, "X".rjust(8), "Y".rjust(8), "Descripció".rjust(12))
-        print(indent, "=======".rjust(8), "=======".rjust(8), "==============".rjust(12))
+        print(indent, "X".rjust(8), "Y".rjust(8), " Descripció")
+        print(indent, "=======".rjust(8), "=======".rjust(8), " ==============")
         for index in range(len(self.LstStorePunts)):
             #print(indent, row[:])
             x = self.LstStorePunts[index][0]
             y = self.LstStorePunts[index][1]
             desc = self.LstStorePunts[index][2]
             #print(indent, str(x).rjust(8), str(y).rjust(8), desc)
-            print(indent, '{0:>8.3f} {1:>8.3f} {2:>12}'.format(x, y, desc))
+            print(indent, '{0:>8.3f} {1:>8.3f}  {2}'.format(x, y, desc))
             
     def dibuixa_punts(self, da, ctx):
         #Caracteristicas globales del pincel

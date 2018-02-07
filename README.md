@@ -1,4 +1,4 @@
-# Estudio de GTK 3 con Python (pyobject)
+# Estudio de GTK 3, Glade y Python (pyobject)
 Pruebas libres siguiendo el tutorial:
 https://python-gtk-3-tutorial.readthedocs.io/en/latest/
 Pruebas gráficas (Cairo) siguiendo y adaptando tutorial:
