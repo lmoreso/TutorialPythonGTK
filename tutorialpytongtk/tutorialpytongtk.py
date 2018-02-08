@@ -102,28 +102,14 @@ class MainHandler():
             
     def on_main_window_hide(self, widget):
         print("on_main_window_hide")
-#        dialog = Gtk.MessageDialog(self.gtk_main_win, 0, Gtk.MessageType.QUESTION,
-#                                   Gtk.ButtonsType.YES_NO, "This is an QUESTION MessageDialog")
-#        dialog.format_secondary_text(
-#            "And this is the secondary text that explains things.")
-#        response = dialog.run()
-#        dialog.destroy()
-#        
-#        if response == Gtk.ResponseType.YES:
-#            print("QUESTION dialog closed by clicking YES button")
-#            return True
-#        elif response == Gtk.ResponseType.NO:
-#            print("QUESTION dialog closed by clicking NO button")
-#            return False
     
     def on_main_window_delete_event(self, *args):
         print("on_main_window_delete_event")
-#        Gtk.main_quit(*args)
         
         dialog = Gtk.MessageDialog(self.gtk_main_win, 0, Gtk.MessageType.QUESTION,
                                    Gtk.ButtonsType.OK_CANCEL, "Realment vols tancar l'aplicació?")
         dialog.format_secondary_text(
-            "Clica 'SI' per tancar l'aplicació, o, 'Cancelar' per continuar treballant-hi.")
+            "Clica 'D'Acord' per tancar l'aplicació, o, 'Cancelar' per continuar treballant-hi.")
         dialog.set_default_response(Gtk.ResponseType.OK) 
         response = dialog.run()
         dialog.destroy()
@@ -137,81 +123,35 @@ class MainHandler():
         
         return True
 
-
-#class CairoHandler():            
     def on_cairo_win_deleted(self, *args):
         print("on_cairo_win_deleted")
-        self.gtk_cairo_win.hide() 
+        
+        dialog = Gtk.MessageDialog(self.gtk_main_win, 0, Gtk.MessageType.QUESTION,
+                                   Gtk.ButtonsType.YES_NO, "Realment vols tancar l'aplicació, o només tancar aquesta Finestra?")
+        dialog.format_secondary_text(
+            "Clica 'Si' per tancar l'aplicació, o, 'No' per tancar aquesta Finestra i continuar treballant amb l'Aplicació principal.")
+        dialog.set_default_response(Gtk.ResponseType.YES) 
+        response = dialog.run()
+        dialog.destroy()
+        
+        if response == Gtk.ResponseType.YES:
+            print("QUESTION dialog closed by clicking YES button")
+            Gtk.main_quit(*args)
+        else:
+            print("QUESTION dialog closed by clicking NO button")
+            self.gtk_cairo_win.hide()
+
         return True
 
     def on_btn_bezier(self, param):
+        print("on_btn_bezier")
         figurasgeo.Bezier(self.LstStorePunts)
         self.LstSelection.select_iter(self.LstStorePunts.get_iter_first())
             
     def on_btn_logaritm(self, param):
         print("on_btn_logaritm", param)
-        self.LstStorePunts.clear()
-        i = 1
-        izquierda = -8
-        base = 2
-        
-        x = 0.0001
-        y = round(math.log(x, base), 3)
-        listiter = self.LstStorePunts.append([x + izquierda, y, "{0}->  Manual".format(i)]) 
-        i += 1
-        
-        x = 0.001
-        y = round(math.log(x, base), 3)
-        listiter = self.LstStorePunts.append([x + izquierda, y, "{0}->  Manual".format(i)]) 
-        i += 1
-        
-        paso = 0.01 
-        x = paso
-        xFin = 0.05        
-        while x < xFin:
-            y = round(math.log(x, base), 3)
-            listiter = self.LstStorePunts.append([x + izquierda, y, "{0}->  Paso: {1} Final: {2} ".format(i, paso, xFin)]) 
-            x += paso
-            i += 1
-    
-        paso = 0.1 
-        x = xFin
-        xFin = 0.5        
-        while x < xFin:
-            y = round(math.log(x, base), 3)
-            listiter = self.LstStorePunts.append([x + izquierda, y, "{0}->  Paso: {1} Final: {2} ".format(i, paso, xFin)]) 
-            x += paso
-            i += 1
-    
-        paso = 0.25 
-        x = xFin
-        xFin = 2        
-        while x < xFin:
-            y = round(math.log(x, base), 3)
-            listiter = self.LstStorePunts.append([x + izquierda, y, "{0}->  Paso: {1} Final: {2} ".format(i, paso, xFin)]) 
-            x += paso
-            i += 1
-    
-        paso = 0.5 
-        x = xFin
-        xFin = 8        
-        while x <= xFin:
-            y = round(math.log(x, base), 3)
-            listiter = self.LstStorePunts.append([x + izquierda, y, "{0}->  Paso: {1} Final: {2} ".format(i, paso, xFin)]) 
-            x += paso
-            i += 1
-    
-        paso = 1 
-        x = xFin
-        xFin = 20        
-        while x <= xFin:
-            y = round(math.log(x, base), 3)
-            listiter = self.LstStorePunts.append([x + izquierda, y, "{0}->  Paso: {1} Final: {2} ".format(i, paso, xFin)]) 
-            x += paso
-            i += 1
-    
-    
-        self.LstSelection.select_iter(listiter)
+        figurasgeo.Logaritm(self.LstStorePunts, 2, 1, -8, 3)
+        self.LstSelection.select_iter(self.LstStorePunts.get_iter_first())
     
     def on_btn_elipse(self, param):
         print("on_btn_elipse", param)
@@ -220,76 +160,19 @@ class MainHandler():
             
     def on_btn_sinus(self, param):
         print("on_btn_sinus", param)
-        self.LstStorePunts.clear()
-        i = 0
-        altura = 5
-        paso = 0.05 * math.pi
-        xIni = (-80) * paso 
-        xFin = -xIni
+        figurasgeo.Sinus(self.LstStorePunts, False, 5, 0.05)
+        self.LstSelection.select_iter(self.LstStorePunts.get_iter_first())
         
-        x = xIni
-        while x <= xFin + paso:
-            y = round(altura * math.sin(x), 3)
-            listiter = self.LstStorePunts.append([x, y, str(i)]) 
-            x += paso
-            i += 1
-        
-        x = xFin
-        while x >= xIni - paso:
-            y = round((-altura) * math.sin(x), 3)
-            listiter = self.LstStorePunts.append([x, y, str(i)]) 
-            x -= paso
-            i += 1
-        
-        self.LstSelection.select_iter(listiter)
-    
     def on_btn_parabola(self, param):
         print("on_btn_parabola", param)
-        self.LstStorePunts.clear()
-        i = 0
-        a = 0.40
-        b = 0
-        c = -5.8
-        paso = 25
-        for xx in range(-600, 600 + paso, paso):
-            i += 1
-            x = xx / 100.0
-            y = round(a * (x ** 2) + b * x + c, 3)
-            listiter = self.LstStorePunts.append([x, y, str(i)])  
-            
-        self.LstSelection.select_iter(listiter)
-    
+        figurasgeo.Parabola(self.LstStorePunts, 0.40, 0, -5.8, 0.25)
+        self.LstSelection.select_iter(self.LstStorePunts.get_iter_first())
+
     def on_btn_hiperbola(self, param):
-        print("on_btn_parabola", param)
-        self.LstStorePunts.clear()
-        i = 0
-        a = 1
-        b = 1
-        c = 0
-        paso = 50
-        for xx in range(-900, -150, paso):
-            i += 1
-            x = xx / 100.0
-            if x != 0: 
-                y = round(a / (b * x) + c, 3)
-                listiter = self.LstStorePunts.append([x, y, str(i)])     
-        paso = 10
-        for xx in range(-150, 150, paso):
-            i += 1
-            x = xx / 100.0
-            if x != 0: 
-                y = round(a / (b * x) + c, 3)
-                listiter = self.LstStorePunts.append([x, y, str(i)])     
-        paso = 50
-        for xx in range(150, 900 + paso, paso):
-            i += 1
-            x = xx / 100.0
-            if x != 0: 
-                y = round(a / (b * x) + c, 3)
-                listiter = self.LstStorePunts.append([x, y, str(i)])     
-        
-        self.LstSelection.select_iter(listiter)
-    
+        print("on_btn_hiperbola", param)
+        figurasgeo.Hiperbola(self.LstStorePunts, 1, 0)
+        self.LstSelection.select_iter(self.LstStorePunts.get_iter_first())
+           
     def on_cheks_changed(self, param):
         #debug
         print("on_cheks_changed")
