@@ -218,5 +218,17 @@ def Parabola(lstStore, a = 0.40, b = 0, c = -5.8, fPaso = 0.25):
         y = round(a * (x ** 2) + b * x + c, 3)
         listiter = lstStore.append([x, y, "{0:0>3d})".format(int(cntPunts))])  
 
+def Recta(lstStore, fCoefX = 0.5, fDesplY = 1, fIni = -8, fPaso = 1):
+    if bdebug:
+        print("Recta")
+        print ("    fCoefX = {0} fDesplY = {1} fIni = {2} fPaso = {3}".format(fCoefX, fDesplY, fIni, fPaso))
+
+    lstStore.clear()
+    cntPunts = 0
+    for x in range(fIni, -fIni):
+        cntPunts += 1
+        y = round(fCoefX * x + fDesplY, 3)
+        listiter = lstStore.append([x, y, "{0:0>3d})".format(int(cntPunts))])  
+
     
                 

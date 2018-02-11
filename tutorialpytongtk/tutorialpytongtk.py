@@ -6,6 +6,7 @@ from gi.repository import Gtk
 import random
 import math
 import figurasgeo
+import tut_gtk_bucky_robers as br
 
 #fitxer_glade = "TutPythonGTK_2.glade"
 #cairo_window_name = "dlg_ex_cairo"
@@ -30,7 +31,6 @@ class DialogExample(Gtk.Dialog):
         self.show_all()
 
 class MainHandler():
-    gtk_cairo_win = 0
     LstStorePunts = 0
     DrawArea = 0
     LstSelection = 0
@@ -43,6 +43,7 @@ class MainHandler():
     
     
     def __init__(self, builder, gtkwin, cairo_win):
+        print("MainHandler.__init__()")
         self.LstStorePunts = builder.get_object("liststore2")
         self.DrawArea = builder.get_object("chart_area")
         self.LstSelection = builder.get_object("treeview1").get_selection()
@@ -56,10 +57,25 @@ class MainHandler():
         self.gtk_main_win = gtkwin
         self.gtk_builder = builder
         self.gtk_cairo_win = cairo_win
-        print("MainHandler.__init__()")
+        self.on_btn_recta(0)
         self.print_punts("".ljust(2))
         
-    
+    def on_mnu_br_tree_view_fil(self, widget):
+        print("on_mnu_br_tree_view_fil")
+        br.TreeViewFilterWindow(self.gtk_main_win, False, True)     
+        
+    def on_mnu_br_tree_view_ord(self, widget):
+        print("on_mnu_br_tree_view_fil")
+        br.TreeViewFilterWindow(self.gtk_main_win, True, False)     
+        
+    def on_mnu_br_tree_editable(self, widget):
+        print("on_mnu_br_tree_view")
+        br.CellRendererTextWindow(self.gtk_main_win)     
+        
+    def on_mnu_br_tree_sortable(self, widget):
+        print("on_mnu_br_tree_sortable")
+        br.SortableTreeWindow(self.gtk_main_win)      
+        
     def on_mnu_ex_cairo(self, widget):
         print("on_mnu_ex_cairo")
         self.gtk_cairo_win.present() 
@@ -142,7 +158,22 @@ class MainHandler():
             self.gtk_cairo_win.hide()
 
         return True
+    
+    def on_btn_cairo_salir(self, *args):
+        Gtk.main_quit(*args)
+    
+    def on_btn_cairo_cerrar(self, *args):
+        self.gtk_cairo_win.hide()
+        return True
 
+    def on_btn_propietats_geo(self, param):
+        self.on_opcion_no_implementada(param)
+        
+    def on_btn_recta(self, param):
+        print("on_btn_recta")
+        figurasgeo.Recta(self.LstStorePunts)
+        self.LstSelection.select_iter(self.LstStorePunts.get_iter_first())
+            
     def on_btn_bezier(self, param):
         print("on_btn_bezier")
         figurasgeo.Bezier(self.LstStorePunts)

@@ -54,7 +54,7 @@
     <property name="can_focus">False</property>
     <property name="border_width">6</property>
     <property name="title" translatable="yes">Charter</property>
-    <property name="default_width">750</property>
+    <property name="default_width">671</property>
     <property name="default_height">450</property>
     <property name="icon_name">applications-graphics</property>
     <signal name="delete-event" handler="on_cairo_win_deleted" swapped="no"/>
@@ -261,8 +261,6 @@
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
-                            <property name="xalign">0.49000000953674316</property>
-                            <property name="yalign">0.4699999988079071</property>
                             <signal name="clicked" handler="cb_btn_inferior" swapped="no"/>
                             <child>
                               <object class="GtkImage" id="image6">
@@ -410,47 +408,6 @@
                             <property name="position">13</property>
                           </packing>
                         </child>
-                        <child>
-                          <object class="GtkButton" id="btn_cairo_cerrar">
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="receives_default">True</property>
-                            <signal name="clicked" handler="on_btn_cairo_cerrar" swapped="no"/>
-                            <child>
-                              <object class="GtkImage" id="image8">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="stock">gtk-close</property>
-                              </object>
-                            </child>
-                          </object>
-                          <packing>
-                            <property name="expand">True</property>
-                            <property name="fill">True</property>
-                            <property name="position">14</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkButton" id="btn_cairo_salir">
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="receives_default">True</property>
-                            <property name="opacity">0.96862745098039216</property>
-                            <signal name="clicked" handler="on_btn_cairo_salir" swapped="no"/>
-                            <child>
-                              <object class="GtkImage" id="image9">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="stock">gtk-quit</property>
-                              </object>
-                            </child>
-                          </object>
-                          <packing>
-                            <property name="expand">True</property>
-                            <property name="fill">True</property>
-                            <property name="position">15</property>
-                          </packing>
-                        </child>
                       </object>
                     </child>
                   </object>
@@ -521,8 +478,6 @@
                   <object class="GtkBox" id="box3H">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="halign">start</property>
-                    <property name="resize_mode">immediate</property>
                     <child>
                       <object class="GtkButtonBox" id="buttonbox2">
                         <property name="visible">True</property>
@@ -584,10 +539,70 @@
                         <property name="position">0</property>
                       </packing>
                     </child>
+                    <child>
+                      <object class="GtkButtonBox" id="buttonbox1">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="halign">end</property>
+                        <property name="resize_mode">immediate</property>
+                        <property name="layout_style">start</property>
+                        <child>
+                          <object class="GtkButton" id="btn_cairo_salir">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                            <property name="halign">end</property>
+                            <signal name="clicked" handler="on_btn_cairo_salir" swapped="no"/>
+                            <child>
+                              <object class="GtkImage" id="image9">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="stock">gtk-quit</property>
+                              </object>
+                            </child>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
+                            <property name="pack_type">end</property>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkButton" id="btn_cairo_cerrar">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                            <property name="halign">end</property>
+                            <signal name="clicked" handler="on_btn_cairo_cerrar" swapped="no"/>
+                            <child>
+                              <object class="GtkImage" id="image8">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="stock">gtk-close</property>
+                              </object>
+                            </child>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
+                            <property name="pack_type">end</property>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">False</property>
+                        <property name="padding">2</property>
+                        <property name="pack_type">end</property>
+                        <property name="position">1</property>
+                      </packing>
+                    </child>
                   </object>
                   <packing>
                     <property name="expand">False</property>
-                    <property name="fill">False</property>
+                    <property name="fill">True</property>
                     <property name="position">1</property>
                   </packing>
                 </child>
@@ -782,56 +797,6 @@
                         <property name="label" translatable="yes">Exemple _Cairo</property>
                         <property name="use_underline">True</property>
                         <signal name="activate" handler="on_mnu_ex_cairo" swapped="no"/>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkMenuItem" id="mnu_buckyrobers">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="label" translatable="yes">Bucky Robers</property>
-                        <property name="use_underline">True</property>
-                        <child type="submenu">
-                          <object class="GtkMenu" id="menu5">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <child>
-                              <object class="GtkMenuItem" id="mnu_br_tree_view_ord">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="label" translatable="yes">Tree View Ordenable</property>
-                                <property name="use_underline">True</property>
-                                <signal name="activate" handler="on_mnu_br_tree_view_ord" swapped="no"/>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkMenuItem" id="mnu_br_tree_view_fil">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="label" translatable="yes">Tree View Filtrable</property>
-                                <property name="use_underline">True</property>
-                                <signal name="activate" handler="on_mnu_br_tree_view_fil" swapped="no"/>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkMenuItem" id="mnu_br_tree_editable">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="label" translatable="yes">Columna Editable</property>
-                                <property name="use_underline">True</property>
-                                <signal name="activate" handler="on_mnu_br_tree_editable" swapped="no"/>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkMenuItem" id="mnu_br_tree_sortable">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="label" translatable="yes">Tree Ordenable</property>
-                                <property name="use_underline">True</property>
-                                <signal name="activate" handler="on_mnu_br_tree_sortable" swapped="no"/>
-                              </object>
-                            </child>
-                          </object>
-                        </child>
                       </object>
                     </child>
                   </object>
