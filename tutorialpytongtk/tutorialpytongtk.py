@@ -115,6 +115,11 @@ class MainHandler():
             print("    You clicked the CANCEL button")
 
         dialog.destroy()
+   
+    def on_tree_view_reorder(self, treeviewcolumn, *user_data):        
+        print("on_tree_view_reorder")
+        # Forçar repintat del area
+        self.DrawArea.queue_draw()
             
     def on_main_window_hide(self, widget):
         print("on_main_window_hide")
@@ -168,6 +173,15 @@ class MainHandler():
 
     def on_btn_propietats_geo(self, param):
         self.on_opcion_no_implementada(param)
+        
+    def on_col_x_edited(self, widget, path, text):
+        self.LstStorePunts[path][0] = float(text.replace(",", "."))
+
+    def on_col_y_edited(self, widget, path, text):
+        self.LstStorePunts[path][1] = float(text.replace(",", "."))
+
+    def on_col_desc_edited(self, widget, path, text):
+        self.LstStorePunts[path][2] = text    
         
     def on_btn_recta(self, param):
         print("on_btn_recta")

@@ -144,6 +144,7 @@ def Logaritm(lstStore, fBase = 2, fCoefX = 1, fDesplX = -10, fDesplY = 3,
 
 def Bezier(lstStore, tIni = -1.0, tFin = 2.0, fPaso = 0.05, lstPunts = [(-2, 3), (-2, 5), (2, 5), (2, 3)]):
     lstStore.clear()
+    cntPunts = 0
     pa = lstPunts[0]
     pb = lstPunts[1]
     pc = lstPunts[2]
@@ -168,13 +169,14 @@ def Bezier(lstStore, tIni = -1.0, tFin = 2.0, fPaso = 0.05, lstPunts = [(-2, 3),
     tini = int(round(tIni * 100, 0))
     tend = int(round(tFin * 100, 0))
     for tt in range (tini, tend + paso, paso):
+        cntPunts += 1
         t = tt / 100.0
         x = pa[0] * ((1 - t) ** 3) + 3 * pb[0] * t * ((1 - t) ** 2) + 3 * pc[0] * (t ** 2) * (1 - t) + pd[0] * (t ** 3)
         y = pa[1] * ((1 - t) ** 3) + 3 * pb[1] * t * ((1 - t) ** 2) + 3 * pc[1] * (t ** 2) * (1 - t) + pd[1] * (t ** 3)
-        listiter = lstStore.append([round(x, 3), round(y, 3), str(t)])  
+        listiter = lstStore.append([round(x, 3), round(y, 3), '{0:0>3d}) t = {1:> 6.2f}'.format(int(cntPunts), t)])  
         if bdebug:
-            print(indent, '{0:>6.2f} {0:>8.3f} {1:>8.3f}'.format(t, round(x, 3), round(y, 3)))
-    
+            print(indent, '{0:>6.2f} {1:>8.3f} {2:>8.3f}'.format(t, x, y))
+
 def Sinus(lstStore, bCos = False, fAltura = 5.0, fPasoFraccionPi = 0.05):
     lstStore.clear()
     cntPunts = 0

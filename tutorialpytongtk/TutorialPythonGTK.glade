@@ -5,7 +5,7 @@
   <object class="GtkAdjustment" id="adjustment1">
     <property name="lower">-5000</property>
     <property name="upper">5000</property>
-    <property name="step_increment">0.10000000000000001</property>
+    <property name="step_increment">0.01</property>
     <property name="page_increment">10</property>
   </object>
   <object class="GtkListStore" id="liststore2">
@@ -82,6 +82,7 @@
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="model">liststore2</property>
+                        <property name="reorderable">True</property>
                         <property name="enable_grid_lines">both</property>
                         <child internal-child="selection">
                           <object class="GtkTreeSelection" id="treeview-selection1">
@@ -93,10 +94,15 @@
                             <property name="title" translatable="yes">X</property>
                             <property name="clickable">True</property>
                             <property name="reorderable">True</property>
+                            <property name="sort_indicator">True</property>
+                            <property name="sort_column_id">0</property>
+                            <signal name="clicked" handler="on_tree_view_reorder" swapped="no"/>
                             <child>
                               <object class="GtkCellRendererSpin" id="cellrendererspin1">
                                 <property name="editable">True</property>
                                 <property name="adjustment">adjustment1</property>
+                                <property name="digits">4</property>
+                                <signal name="edited" handler="on_col_x_edited" swapped="no"/>
                               </object>
                               <attributes>
                                 <attribute name="text">0</attribute>
@@ -109,10 +115,15 @@
                             <property name="title" translatable="yes">Y</property>
                             <property name="clickable">True</property>
                             <property name="reorderable">True</property>
+                            <property name="sort_indicator">True</property>
+                            <property name="sort_column_id">1</property>
+                            <signal name="clicked" handler="on_tree_view_reorder" swapped="no"/>
                             <child>
                               <object class="GtkCellRendererSpin" id="cellrendererspin2">
                                 <property name="editable">True</property>
                                 <property name="adjustment">adjustment1</property>
+                                <property name="digits">4</property>
+                                <signal name="edited" handler="on_col_y_edited" swapped="no"/>
                               </object>
                               <attributes>
                                 <attribute name="text">1</attribute>
@@ -125,9 +136,12 @@
                             <property name="title" translatable="yes">Descripció</property>
                             <property name="clickable">True</property>
                             <property name="reorderable">True</property>
+                            <property name="sort_column_id">2</property>
+                            <signal name="clicked" handler="on_tree_view_reorder" swapped="no"/>
                             <child>
                               <object class="GtkCellRendererText" id="cellrenderertext1">
                                 <property name="editable">True</property>
+                                <signal name="edited" handler="on_col_desc_edited" swapped="no"/>
                               </object>
                               <attributes>
                                 <attribute name="text">2</attribute>
