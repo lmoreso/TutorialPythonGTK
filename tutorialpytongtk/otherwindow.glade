@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.18.3 -->
+<interface>
+  <requires lib="gtk+" version="3.12"/>
+  <object class="GtkWindow" id="otherwindow">
+    <property name="can_focus">False</property>
+    <property name="title" translatable="yes">Otra Ventana</property>
+    <property name="default_width">400</property>
+    <property name="default_height">250</property>
+    <property name="icon_name">emblem-default</property>
+    <signal name="delete-event" handler="on_otherwindow_delete_event" swapped="no"/>
+    <child>
+      <object class="GtkButton" id="btnprueba">
+        <property name="label" translatable="yes">button</property>
+        <property name="visible">True</property>
+        <property name="can_focus">True</property>
+        <property name="receives_default">True</property>
+        <property name="halign">center</property>
+        <property name="valign">center</property>
+        <signal name="clicked" handler="on_opcion_no_implementada" swapped="no"/>
+      </object>
+    </child>
+  </object>
+</interface>
