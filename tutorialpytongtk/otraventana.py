@@ -31,18 +31,25 @@ class OtherWindowHandler:
             return True
         
 class OtherWindow:        
-    def __init__(self, bEsMainApp = False, bModal = True):        
+    def __init__(self, GtkWinParent):  
+        if GtkWinParent is not None:
+            bEsMainApp = False
+        else:
+            bEsMainApp = True
+            
         builder = Gtk.Builder()
         builder.add_from_file(fitxer_glade)
         mainwindow = builder.get_object(main_window_name)
         builder.connect_signals(OtherWindowHandler(mainwindow, bEsMainApp))
-        if not bEsMainApp and bModal: 
+        if not bEsMainApp: 
             mainwindow.set_modal(True)
-        mainwindow.show_all()
-        if bEsMainApp:
+            mainwindow.set_transient_for(GtkWinParent)
+            mainwindow.show_all()
+        else:
+            mainwindow.show_all()
             Gtk.main()
 
 if __name__ == "__main__":
     print("Ejecutando otraventana.py")
-    OtherWindow(True)    
+    OtherWindow(None)    
     print("Adiós muy buenas.")

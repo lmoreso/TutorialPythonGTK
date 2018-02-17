@@ -287,7 +287,7 @@ class CairoWindowHandler:
     
     def cb_btn_inferior(self, b):
         print("cb_btn_inferior", b)
-        model, listiter  = self.LstSelection.get_selected()
+        model, listiter = self.LstSelection.get_selected()
         if listiter != None:
             self.elimina_orden()
             self.LstStorePunts.move_before(listiter)
@@ -304,19 +304,26 @@ class CairoWindowHandler:
         self.DrawArea.queue_draw()
 
 class CairoWindow:        
-    def __init__(self, bEsMainApp = False, bModal = True):        
+    def __init__(self, GtkWinParent = None):        
+        if GtkWinParent is not None:
+            bEsMainApp = False
+        else:
+            bEsMainApp = True
+            
         builder = Gtk.Builder()
         builder.add_from_file(fitxer_glade)
         mainwindow = builder.get_object(main_window_name)
         builder.connect_signals(CairoWindowHandler(mainwindow, builder, bEsMainApp))
-        if not bEsMainApp and bModal: 
+        if not bEsMainApp: 
             mainwindow.set_modal(True)
-        mainwindow.show_all()
-        if bEsMainApp:
+            mainwindow.set_transient_for(GtkWinParent)
+            mainwindow.show_all()
+        else:
+            mainwindow.show_all()
             builder.get_object("btn_cairo_cerrar").hide()
             Gtk.main()
 
 if __name__ == "__main__":
     print("Ejecutando tutorialcairo.py")
-    CairoWindow(True)    
+    CairoWindow(None)    
     print("Adiós muy buenas.")

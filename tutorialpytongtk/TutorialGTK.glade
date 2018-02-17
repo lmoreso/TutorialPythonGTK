@@ -193,48 +193,7 @@
                         <property name="can_focus">False</property>
                         <property name="label" translatable="yes">Bucky Robers</property>
                         <property name="use_underline">True</property>
-                        <child type="submenu">
-                          <object class="GtkMenu" id="menu5">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <child>
-                              <object class="GtkMenuItem" id="mnu_br_tree_view_ord">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="label" translatable="yes">Tree View Ordenable</property>
-                                <property name="use_underline">True</property>
-                                <signal name="activate" handler="on_mnu_br_tree_view_ord" swapped="no"/>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkMenuItem" id="mnu_br_tree_view_fil">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="label" translatable="yes">Tree View Filtrable</property>
-                                <property name="use_underline">True</property>
-                                <signal name="activate" handler="on_mnu_br_tree_view_fil" swapped="no"/>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkMenuItem" id="mnu_br_tree_editable">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="label" translatable="yes">Columna Editable</property>
-                                <property name="use_underline">True</property>
-                                <signal name="activate" handler="on_mnu_br_tree_editable" swapped="no"/>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkMenuItem" id="mnu_br_tree_sortable">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="label" translatable="yes">Tree Ordenable</property>
-                                <property name="use_underline">True</property>
-                                <signal name="activate" handler="on_mnu_br_tree_sortable" swapped="no"/>
-                              </object>
-                            </child>
-                          </object>
-                        </child>
+                        <signal name="activate" handler="on_mnu_buckyrobers" swapped="no"/>
                       </object>
                     </child>
                   </object>

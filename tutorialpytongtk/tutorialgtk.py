@@ -3,8 +3,6 @@ import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 
-import tut_gtk_bucky_robers as br
-
 fitxer_glade = "TutorialGTK.glade"
 main_window_name = "main_window"
 
@@ -31,32 +29,21 @@ class MainHandler():
         #print("MainHandler.__init__()")
         self.gtk_builder = builder
         self.gtk_main_win = gtkwin
+        
+    def on_mnu_buckyrobers(self, widget):
+        print("on_mnu_buckyrobers")
+        from tut_gtk_bucky_robers import BuckyRobersWindow
+        BuckyRobersWindow(self.gtk_main_win)
 
     def on_mnu_otherwindow(self, widget):
         print("on_mnu_otherwindow")
         from otraventana import OtherWindow
-        OtherWindow()
-        
-    def on_mnu_br_tree_view_fil(self, widget):
-        print("on_mnu_br_tree_view_fil")
-        br.TreeViewFilterWindow(self.gtk_main_win, False, True)     
-        
-    def on_mnu_br_tree_view_ord(self, widget):
-        print("on_mnu_br_tree_view_fil")
-        br.TreeViewFilterWindow(self.gtk_main_win, True, False)     
-        
-    def on_mnu_br_tree_editable(self, widget):
-        print("on_mnu_br_tree_view")
-        br.CellRendererTextWindow(self.gtk_main_win)     
-        
-    def on_mnu_br_tree_sortable(self, widget):
-        print("on_mnu_br_tree_sortable")
-        br.SortableTreeWindow(self.gtk_main_win)      
+        OtherWindow(self.gtk_main_win)
         
     def on_mnu_ex_cairo(self, widget):
         print("on_mnu_ex_cairo")
         from  tutorialcairo import CairoWindow
-        CairoWindow()
+        CairoWindow(self.gtk_main_win)
         
     def on_mnu_about_activate(self, widget):
         dialog = Gtk.MessageDialog(self.gtk_main_win, 0, Gtk.MessageType.INFO,
